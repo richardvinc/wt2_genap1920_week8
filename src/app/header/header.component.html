@@ -1,0 +1,14 @@
+<mat-toolbar [routerLink]="['/']">
+  <span class="header-nav">Angular Reactive Form</span>
+  <span class="example-spacer"></span>
+  <mat-icon
+    class="example-icon"
+    aria-hidden="false"
+    aria-label="menu"
+    [matMenuTriggerFor]="menu"
+    >menu</mat-icon
+  >
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="goToForm()">Add User</button>
+  </mat-menu>
+</mat-toolbar>

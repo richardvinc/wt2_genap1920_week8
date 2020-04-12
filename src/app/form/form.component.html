@@ -1,0 +1,106 @@
+<div class="form-container" [formGroup]="userForm">
+  <h1>User Form</h1>
+  <mat-form-field appearance="floating">
+    <mat-label>Name</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="user's name"
+      formControlName="name"
+    />
+    <mat-error *ngIf="name.invalid && name.touched">
+      name has to be 5 characters mininum and cannot be empty
+    </mat-error>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="floating">
+    <mat-label>Age</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="user's age"
+      formControlName="age"
+    />
+    <mat-error *ngIf="age.errors?.min && age.touched">
+      {{ age.errors.min.actual }} is too young
+    </mat-error>
+    <mat-error *ngIf="age.errors?.max && age.touched">
+      {{ age.errors.max.actual }} is too old
+    </mat-error>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="floating">
+    <mat-label>Height</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="user's height"
+      formControlName="height"
+    />
+    <mat-error *ngIf="height.errors?.min && height.touched">
+      {{ height.errors.min.actual }} is too short
+    </mat-error>
+  </mat-form-field>
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>Division</mat-label>
+    <mat-select formControlName="division">
+      <mat-option value="Human Resource">Human Resource</mat-option>
+      <mat-option value="Information Technology"
+        >Information Technology</mat-option
+      >
+      <mat-option value="Marketing">Marketing</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  <mat-checkbox formControlName="check">{{
+    update
+      ? "I want to update this user"
+      : "I agree to the terms and conditions"
+  }}</mat-checkbox>
+  <div class="button-container">
+    <button
+      type="submit"
+      mat-raised-button
+      color="warn"
+      *ngIf="update"
+      (click)="addUser()"
+    >
+      Delete
+    </button>
+    <span class="spacer"></span>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="userForm.invalid"
+      *ngIf="!update"
+      (click)="addUser()"
+    >
+      Add User
+    </button>
+    <button
+      type="submit"
+      mat-raised-button
+      color="accent"
+      [disabled]="userForm.invalid"
+      *ngIf="update"
+      (click)="updateUser()"
+    >
+      Update
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="form-status">
+    <h3 class="form-misc">Form value</h3>
+    {{ userForm.value | json }}
+    <br />
+    <h3 class="form-misc">Form state</h3>
+    Valid: {{ userForm.valid }} <br />
+    Invalid: {{ userForm.invalid }} <br />
+    Dirty: {{ userForm.dirty }} <br />
+    Pristine: {{ userForm.pristine }} <br />
+    Touched: {{ userForm.touched }} <br />
+    Untouched: {{ userForm.untouched }}
+  </div>
+</div>
